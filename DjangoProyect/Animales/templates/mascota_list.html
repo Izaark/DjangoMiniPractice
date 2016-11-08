@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block header %}
+	<h3>Registros</h3>
+{% endblock header %}
+
+{% block content %}
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<td>#</td>
+			<td>Nombre</td>
+			<td>Sexo</td>
+			<td>Edad</td>
+			<td>Fecha de Rescate</td>
+			<td>Adoptante</td>
+			<td>Acciones</td>
+		
+		</tr>
+		
+	</thead>
+	<tbody>
+	{% if object_list %}
+	{% for mascota in object_list %}
+	<tr>
+		<td>{{mascota.id}}</td>
+		<td>{{mascota.name}}</td>
+		<td>{{mascota.sex}}</td>
+		<td>{{mascota.age}} años</td>
+		<td>{{mascota.date}}</td>
+		<td>{{mascota.persona.name}}, contacto: {{mascota.persona.email}}</td>
+		<td>
+			<a class="btn btn-primary" href="{% url 'Mascota:mascota_editar' mascota.id%}">Editar</a>
+			<a class="btn btn-danger" href="{% url 'Mascota:mascota_eliminar' mascota.id%}">Eliminar</a>
+		</td>
+	</tr> 
+		
+	{% endfor %}
+		{% else %}
+		<h3>No haY mascotas</h3>
+	{% endif %}
+	
+	</tbody>
+</table>	
+	{% endblock content %}
